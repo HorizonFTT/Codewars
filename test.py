@@ -9,6 +9,7 @@ def countBits(n):
 
 # https://www.codewars.com/kata/square-every-digit/train/python
 def square_digits(num):
+    # Better
     # return int(''.join(str(int(c)**2) for c in str(num)))
     string = str(num)
     result = ''
@@ -20,6 +21,7 @@ def square_digits(num):
 
 # https://www.codewars.com/kata/find-the-odd-int/train/python
 def find_it(seq):
+    # Better
     # return reduce(operator.xor, xs)
     result = 0
     for i in seq:
@@ -29,6 +31,7 @@ def find_it(seq):
 
 # https://www.codewars.com/kata/equal-sides-of-an-array/train/python
 def find_even_index(arr):
+    # Better
     # left, right = 0, sum(arr)
     # for i, e in enumerate(arr):
     #     right -= e
@@ -44,6 +47,7 @@ def find_even_index(arr):
 
 # https://www.codewars.com/kata/ones-and-zeros/train/python
 def binary_array_to_number(arr):
+    # Better
     # return int("".join(map(str, arr)), 2)
     binary = ''
     for i in arr:
@@ -53,6 +57,7 @@ def binary_array_to_number(arr):
 
 # https://www.codewars.com/kata/decode-the-morse-code/train/python
 def decodeMorse(morse_code):
+    # Better
     # return ' '.join(''.join(MORSE_CODE[letter] for letter in word.split(' ')) for word in morseCode.strip().split('   '))
     result = ''
     words = morse_code.strip().split('   ')
@@ -66,6 +71,7 @@ def decodeMorse(morse_code):
 
 # https://www.codewars.com/kata/iq-test/train/python
 def iq_test(numbers):
+    # Better
     # e = [int(i) % 2 == 0 for i in numbers.split()]
     # return e.index(True) + 1 if e.count(True) == 1 else e.index(False) + 1
     even, odd = -1, -1
@@ -90,6 +96,7 @@ def dig_pow(n, p):
 
 # https://www.codewars.com/kata/simple-encryption-number-1-alternating-split/train/python
 def decrypt(encrypted_text, n):
+    # Better
     # half = len(text) // 2
     # arr = list(text)
     # for _ in range(n):
@@ -134,7 +141,7 @@ def expanded_form(num):
 
 
 # https://www.codewars.com/kata/calculating-with-functions/train/python
-
+# Better
 # id_ = lambda x: x
 # number = lambda x: lambda f=id_: f(x)
 # zero, one, two, three, four, five, six, seven, eight, nine = map(number, range(10))
@@ -205,6 +212,7 @@ def song_decoder(song):
 
 # https://www.codewars.com/kata/5839edaa6754d6fec10000a2/train/python
 def find_missing_letter(chars):
+    # Better
     # next(chr(ord(c[i])+1) for i in range(len(c)-1) if ord(c[i])+1 != ord(c[i+1]))
     ords = [ord(c) for c in chars]
     for i in range(1, len(ords)):
@@ -214,6 +222,7 @@ def find_missing_letter(chars):
 
 # https://www.codewars.com/kata/extract-the-domain-name-from-a-url-1/train/python
 def domain_name(url):
+    # Better
     # return url.split("//")[-1].split("www.")[-1].split(".")[0]
     # return re.search('(https?://)?(www\d?\.)?(?P<name>[\w-]+)\.', url).group('name')
     list = url.split('//')
@@ -232,6 +241,7 @@ def domain_name(url):
 
 # https://www.codewars.com/kata/valid-parentheses/train/python
 def valid_parentheses(string):
+    # Better
     # cnt = 0
     # for char in string:
     #     if char == '(': cnt += 1
@@ -252,6 +262,10 @@ def valid_parentheses(string):
 
 # https://www.codewars.com/kata/sudoku-solution-validator/train/python
 def validSolution(board):
+    # Better
+    # blocks = [[board[x+a][y+b] for a in (0, 1, 2) for b in (0, 1, 2)] for x in (0, 3, 6) for y in (0, 3, 6)]
+    # return not filter(lambda x: set(x) != set(range(1, 10)), board + zip(*board) + blocks)
+    # What the fuck???
     flags = []
     for i in range(9):
         flags.append(False)
