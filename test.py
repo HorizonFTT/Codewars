@@ -309,3 +309,32 @@ def choose_best_sum(t, k, ls):
 # https://www.codewars.com/kata/520b9d2ad5c005041100000f/train/python
 def pig_it(text):
     return ' '.join((w + w[0] + 'ay')[1:] if w.isalpha() else w for w in text.split())
+
+
+# https://www.codewars.com/kata/52f787eb172a8b4ae1000a34/train/python
+def zeros(n):
+    x = n//5
+    return x+zeros(x) if x else 0
+
+
+# https://www.codewars.com/kata/530e15517bc88ac656000716/train/python
+def rot13(message):
+    return ''.join(chr(ord('a')+(ord(c)-ord('a')+13) % 26) if c.islower() else chr(ord('A')+(ord(c)-ord('A')+13) % 26) if c.isupper() else c for c in message)
+
+
+# https://www.codewars.com/kata/54d512e62a5e54c96200019e/train/python
+def primeFactors(n):
+    result = ''
+    i = 2
+    while n > 1:
+        t = 0
+        while n % i == 0:
+            n //= i
+            t += 1
+        if t == 1:
+            result += f'({i})'
+        elif t > 1:
+            result += f'({i}**{t})'
+        t = 0
+        i += 1
+    return result
