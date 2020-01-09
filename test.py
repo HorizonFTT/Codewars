@@ -296,3 +296,16 @@ def validSolution(board):
                 return False
             flags[k] = False
     return True
+
+# https://www.codewars.com/kata/best-travel/train/python
+
+
+def choose_best_sum(t, k, ls):
+    # fuck
+    from itertools import combinations
+    return max((s for s in (sum(dists) for dists in combinations(ls, k)) if s <= t), default=None)
+
+
+# https://www.codewars.com/kata/520b9d2ad5c005041100000f/train/python
+def pig_it(text):
+    return ' '.join((w + w[0] + 'ay')[1:] if w.isalpha() else w for w in text.split())
