@@ -338,3 +338,34 @@ def primeFactors(n):
         t = 0
         i += 1
     return result
+
+
+# https://www.codewars.com/kata/58c5577d61aefcf3ff000081/train/python
+def encode_rail_fence_cipher(string, n):
+    size = 2 * (n - 1)
+    list = []
+    for i in range(len(string) // size):
+        list.append(string[i*size:size*(i+1)])
+    list.append(string[-(len(string) % size):])
+    encoded = ''
+    for i in range(n):
+        for s in list:
+            if i < len(s):
+                encoded += s[i]
+                if i > 0 and i < size//2:
+                    encoded += s[-i]
+
+    return encoded
+
+
+def decode_rail_fence_cipher(string, n):
+    size = 2 * (n - 1)
+    decoded = ''
+    for i in range(len(string) // size + 1):
+        for j in range(size):
+            if j < size // 2 and i * size + j < len(string):
+                decoded += string[i * size + j]
+            else:
+                if i * size + size - j - 1 + j < len(string):
+                    decoded += string[i * size + size - j - 1]
+    return decoded
