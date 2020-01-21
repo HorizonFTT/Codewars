@@ -425,3 +425,48 @@ class VigenereCipher(object):
             else:
                 result += text[i]
         return result
+
+
+# https://www.codewars.com/kata/54d496788776e49e6b00052f/train/python
+def odd_iter():
+    n = 1
+    while True:
+        n = n + 2
+        yield n
+
+
+def not_divisible(n):
+    return lambda x: x % n > 0
+
+
+def primes():
+    yield 2
+    it = odd_iter()
+    while True:
+        n = next(it)
+        yield n
+        it = filter(not_divisible(n), it)
+
+
+def prime_list(n):
+    result = []
+    for i in primes():
+        if i <= n:
+            result.append(i)
+        else:
+            return result
+
+
+def sum_for_list(lst):
+    result = []
+    l = prime_list(max([abs(i) for i in lst]))
+    for p in l:
+        s = 0
+        flag = False
+        for i in lst:
+            if i % p == 0:
+                s += i
+                flag = True
+        if flag:
+            result.append([p, s])
+    return result
