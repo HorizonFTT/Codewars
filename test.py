@@ -340,32 +340,88 @@ def primeFactors(n):
     return result
 
 
-# https://www.codewars.com/kata/58c5577d61aefcf3ff000081/train/python
-def encode_rail_fence_cipher(string, n):
-    size = 2 * (n - 1)
-    list = []
-    for i in range(len(string) // size):
-        list.append(string[i*size:size*(i+1)])
-    list.append(string[-(len(string) % size):])
-    encoded = ''
-    for i in range(n):
-        for s in list:
-            if i < len(s):
-                encoded += s[i]
-                if i > 0 and i < size//2:
-                    encoded += s[-i]
+# # https://www.codewars.com/kata/58c5577d61aefcf3ff000081/train/python
+# def encode_rail_fence_cipher(string, n):
+#     size = 2 * (n - 1)
+#     list = []
+#     for i in range(len(string) // size):
+#         list.append(string[i*size:size*(i+1)])
+#     list.append(string[-(len(string) % size):])
+#     encoded = ''
+#     for i in range(n):
+#         for s in list:
+#             if i < len(s):
+#                 encoded += s[i]
+#                 if i > 0 and i < size//2:
+#                     encoded += s[-i]
 
-    return encoded
+#     return encoded
 
 
-def decode_rail_fence_cipher(string, n):
-    size = 2 * (n - 1)
-    decoded = ''
-    for i in range(len(string) // size + 1):
-        for j in range(size):
-            if j < size // 2 and i * size + j < len(string):
-                decoded += string[i * size + j]
+# def decode_rail_fence_cipher(string, n):
+#     size = 2 * (n - 1)
+#     decoded = ''
+#     for i in range(len(string) // size + 1):
+#         for j in range(size):
+#             if j < size // 2 and i * size + j < len(string):
+#                 decoded += string[i * size + j]
+#             else:
+#                 if i * size + size - j - 1 + j < len(string):
+#                     decoded += string[i * size + size - j - 1]
+#     return decoded
+
+
+# https://www.codewars.com/kata/51e056fe544cf36c410000fb/train/python
+def top_3_words(text):
+    text = text.lower()
+    times = {}
+    n = len(text)
+    i = 0
+    while i != n:
+        w = ''
+        while i != n and not text[i].isalpha() and text[i] != '\'':
+            i += 1
+        flag = False
+        while i != n and (text[i].isalpha() or text[i] == '\''):
+            if text[i].isalpha():
+                flag = True
+            w += text[i]
+            i += 1
+        if not flag:
+            continue
+        if times.get(w) is None:
+            times[w] = 0
+        else:
+            times[w] += 1
+    return [e[0] for e in sorted(times.items(), key=lambda x: x[1], reverse=True)[:3]]
+
+
+# https://www.codewars.com/kata/52d1bd3694d26f8d6e0000d3/train/python
+class VigenereCipher(object):
+    def __init__(self, key, alphabet):
+        self.key = key
+        self.alphabet = alphabet
+        self.lenOfKey = len(key)
+        self.lenOfAlphabet = len(alphabet)
+
+    def encode(self, text):
+        result = ''
+        for i in range(len(text)):
+            shift = self.alphabet.find(self.key[i % self.lenOfKey])
+            index = self.alphabet.find(text[i])
+            if index != -1:
+                result += self.alphabet[(index+shift) % self.lenOfAlphabet]
             else:
-                if i * size + size - j - 1 + j < len(string):
-                    decoded += string[i * size + size - j - 1]
-    return decoded
+                result += text[i]
+        return result
+
+    def decode(self, text):
+        result = ''
+        for i in range(len(text)):
+            shift = self.alphabet.find(self.key[i % self.lenOfKey])
+            index = self.alphabet.find(text[i])
+            if index != -1:
+                result += self.alphabet[(index-shift) % self.lenOfAlphabet]
+            else:
+                result += text[i]
+        return result
