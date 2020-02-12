@@ -263,7 +263,8 @@ def valid_parentheses(string):
 # https://www.codewars.com/kata/sudoku-solution-validator/train/python
 def validSolution(board):
     # Better
-    # blocks = [[board[x+a][y+b] for a in (0, 1, 2) for b in (0, 1, 2)] for x in (0, 3, 6) for y in (0, 3, 6)]
+    # blocks = [[board[x+a][y+b] for a in (0, 1, 2) for b in (0, 1, 2)]
+    #           for x in (0, 3, 6) for y in (0, 3, 6)]
     # return not filter(lambda x: set(x) != set(range(1, 10)), board + zip(*board) + blocks)
     # What the fuck???
     flags = []
@@ -278,21 +279,21 @@ def validSolution(board):
                         return False
                     flags[value - 1] = True
             for k in range(9):
-                if flags[k] == False:
+                if not flags[k]:
                     return False
                 flags[k] = False
     for i in range(9):
         for j in range(9):
             flags[board[i][j] - 1] = True
         for k in range(9):
-            if flags[k] == False:
+            if not flags[k]:
                 return False
             flags[k] = False
     for i in range(9):
         for j in range(9):
             flags[board[j][i] - 1] = True
         for k in range(9):
-            if flags[k] == False:
+            if not flags[k]:
                 return False
             flags[k] = False
     return True
